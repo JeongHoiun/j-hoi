@@ -16,6 +16,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         style={{
+          width: '100vw',
+          height: '100vh',
           margin: 0,
           padding: 0,
           fontFamily: 'sans-serif'
@@ -32,16 +34,15 @@ export default function RootLayout({
             gap={32}
             borderBottom={`1px solid ${BORDER_COLOR}`}
           >
-            <Button>
-              <Link sx={{ textDecoration: 'None' }} href="/">
-                Home
-              </Link>
-            </Button>
-            <Button>
-              <Link sx={{ textDecoration: 'None' }} href="/blog">
-                Blog
-              </Link>
-            </Button>
+            <Link sx={{ textDecoration: 'None' }} href="/">
+              Home
+            </Link>
+            <Link sx={{ textDecoration: 'None' }} href="/blog">
+              Blog
+            </Link>
+            <Link sx={{ textDecoration: 'None' }} href="/profile">
+              Profile
+            </Link>
           </Box>
           {children}
         </Box>
