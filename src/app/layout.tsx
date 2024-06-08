@@ -1,3 +1,5 @@
+import { BORDER_COLOR } from '@/common/color';
+import { Box, Button, Link } from '@mui/material';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,7 +14,38 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body
+        style={{
+          margin: 0,
+          padding: 0,
+          fontFamily: 'sans-serif'
+        }}
+      >
+        <Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            height={92}
+            width="100vw"
+            alignItems="center"
+            justifyContent="center"
+            gap={32}
+            borderBottom={`1px solid ${BORDER_COLOR}`}
+          >
+            <Button>
+              <Link sx={{ textDecoration: 'None' }} href="/">
+                Home
+              </Link>
+            </Button>
+            <Button>
+              <Link sx={{ textDecoration: 'None' }} href="/blog">
+                Blog
+              </Link>
+            </Button>
+          </Box>
+          {children}
+        </Box>
+      </body>
     </html>
   );
 }
