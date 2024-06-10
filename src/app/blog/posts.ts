@@ -4,6 +4,7 @@ import { Post } from '@/models/post';
 export function getPosts() {
   const fileNames = fs.readdirSync(`public/posts`);
   const mdFileNames = fileNames.filter((file) => file.endsWith('.md'));
+  // TODO: sort by date
   const posts: Post[] = mdFileNames.map((fileName) => {
     const post = fs.readFileSync(`public/posts/${fileName}`, 'utf-8');
 
