@@ -11,13 +11,13 @@ export function getPosts() {
       title: fileName.replace('.md', ''),
       date: fs.statSync(`public/posts/${fileName}`).birthtime.toDateString(),
       content: post,
-      summary: getFirstTwoLines(`public/posts/${fileName}`)
+      summary: getContentSummary(`public/posts/${fileName}`)
     };
   });
   return posts;
 }
 
-function getFirstTwoLines(filePath: string) {
+function getContentSummary(filePath: string) {
   const content = fs.readFileSync(filePath, 'utf8');
   const removeMarkDown = content.replace(/#|`/g, '');
   const sliceContent = removeMarkDown.slice(0, 200);
