@@ -1,6 +1,7 @@
 import { BORDER_COLOR } from '@/common/color';
-import { Box, Button, Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import type { Metadata } from 'next';
+import './style.css';
 
 export const metadata: Metadata = {
   title: 'HOI!',
@@ -28,7 +29,6 @@ export default function RootLayout({
             display="flex"
             flexDirection="row"
             height={92}
-            width="100vw"
             alignItems="center"
             justifyContent="center"
             gap={32}
