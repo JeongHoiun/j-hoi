@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getPosts } from './getPostsFromFileSystem';
+import { getPosts } from './postsService';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
