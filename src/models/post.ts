@@ -3,4 +3,5 @@ export interface Post {
   date: string;
   content: string;
   summary: string;
+  id: number;
 }
