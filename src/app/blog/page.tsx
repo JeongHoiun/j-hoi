@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from '@mui/material';
 import { getPosts } from './posts';
 
-export default function Home() {
+export default function PostList() {
   const posts = getPosts(1);
   return (
     <Box display="flex" padding="64px" width="100%" justifyContent="center" flexDirection="column">
