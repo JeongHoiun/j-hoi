@@ -10,7 +10,7 @@ function getContentSummary(filePath: string) {
   return sliceContent;
 }
 
-export default function getPosts(page: number): Post[] {
+export default function getPosts(page: number): { posts: Post[]; total: number } {
   const fileNames = fs.readdirSync('public/posts');
   const mdFileNames = fileNames.filter((file) => file.endsWith('.md'));
   const sortedMdFileNames = mdFileNames.sort((a, b) => {
@@ -33,5 +33,5 @@ export default function getPosts(page: number): Post[] {
       id: idx + (page - 1) * 5,
     };
   });
-  return posts;
+  return { posts, total: mdFileNames.length };
 }
