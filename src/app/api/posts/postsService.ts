@@ -13,10 +13,16 @@ function getContentSummary(filePath: string) {
 export default function getPosts(page: number): Post[] {
   const fileNames = fs.readdirSync('public/posts');
   const mdFileNames = fileNames.filter((file) => file.endsWith('.md'));
-  // TODO: sort by date
+  const sortedMdFileNames = mdFileNames.sort((a, b) => {
+    return (
+      fs.statSync(`public/posts/${b}`).birthtime.getTime() -
+      fs.statSync(`public/posts/${a}`).birthtime.getTime()
+    );
+  });
+
   const start = (page - 1) * ITEMS_PER_PAGE;
   const end = page * ITEMS_PER_PAGE;
-  const posts = mdFileNames.slice(start, end).map((fileName, idx) => {
+  const posts = sortedMdFileNames.slice(start, end).map((fileName, idx) => {
     const post = fs.readFileSync(`public/posts/${fileName}`, 'utf-8');
 
     return {
