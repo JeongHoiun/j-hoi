@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import getPosts from './postsService';
 
-export default async function GET(request: Request) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = searchParams.get('page');
   if (page) {
