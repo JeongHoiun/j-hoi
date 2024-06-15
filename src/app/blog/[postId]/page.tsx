@@ -1,8 +1,21 @@
 'use client';
+
 import { Post } from '@/models/post';
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
+
+async function getData(request: { id: number }) {
+  const res = await fetch(`/api/post?id=${request.id}`, {
+    method: 'GET',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
 
 export default function BlogPost({ params }: { params: { postId: number } }) {
   const [post, setPost] = useState<Post | null>(null);
@@ -11,7 +24,7 @@ export default function BlogPost({ params }: { params: { postId: number } }) {
     getData({ id: params.postId }).then((data) => {
       setPost(data.post);
     });
-  }, []);
+  }, [params.postId]);
 
   return (
     <Box
@@ -35,16 +48,4 @@ export default function BlogPost({ params }: { params: { postId: number } }) {
       )}
     </Box>
   );
-}
-
-async function getData(request: { id: number }) {
-  const res = await fetch(`/api/post?id=${request.id}`, {
-    method: 'GET'
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
 }

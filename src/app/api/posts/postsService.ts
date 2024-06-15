@@ -2,8 +2,16 @@ import fs from 'fs';
 import { Post } from '@/models/post';
 import { ITEMS_PER_PAGE } from '@/common/const';
 
-export function getPosts(page: number): Post[] {
-  const fileNames = fs.readdirSync(`public/posts`);
+function getContentSummary(filePath: string) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const removeMarkDown = content.replace(/#|`/g, '');
+  const sliceContent = removeMarkDown.slice(0, 200);
+
+  return sliceContent;
+}
+
+export default function getPosts(page: number): Post[] {
+  const fileNames = fs.readdirSync('public/posts');
   const mdFileNames = fileNames.filter((file) => file.endsWith('.md'));
   // TODO: sort by date
   const start = (page - 1) * ITEMS_PER_PAGE;
@@ -16,16 +24,8 @@ export function getPosts(page: number): Post[] {
       date: fs.statSync(`public/posts/${fileName}`).birthtime.toDateString(),
       content: post,
       summary: getContentSummary(`public/posts/${fileName}`),
-      id: idx + (page - 1) * 5
+      id: idx + (page - 1) * 5,
     };
   });
   return posts;
-}
-
-function getContentSummary(filePath: string) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  const removeMarkDown = content.replace(/#|`/g, '');
-  const sliceContent = removeMarkDown.slice(0, 200);
-
-  return sliceContent;
 }

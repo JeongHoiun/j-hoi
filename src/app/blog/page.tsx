@@ -1,8 +1,20 @@
 'use client';
-import { ITEMS_PER_PAGE } from '@/common/const';
+
 import { Post } from '@/models/post';
-import { Box, Link, Pagination, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+
+async function getData(request: { page: number }) {
+  const res = await fetch(`/api/posts?page=${request.page}`, {
+    method: 'GET',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
 
 export default function PostList() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -23,23 +35,11 @@ export default function PostList() {
           </Typography>
           <Typography variant="body1">
             <Link href={`/blog/${post.id}`} sx={{ textDecoration: 'inherit', color: 'inherit' }}>
-              {post.summary + '...'}
+              {`${post.summary}...`}
             </Link>
           </Typography>
         </Box>
       ))}
     </Box>
   );
-}
-
-async function getData(request: { page: number }) {
-  const res = await fetch(`/api/posts?page=${request.page}`, {
-    method: 'GET'
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
 }

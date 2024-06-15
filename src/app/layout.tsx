@@ -5,11 +5,11 @@ import './style.css';
 
 export const metadata: Metadata = {
   title: 'HOI!',
-  description: 'Hoi self-hosting page'
+  description: 'Hoi self-hosting page',
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -20,7 +20,7 @@ export default function RootLayout({
           height: '100vh',
           margin: 0,
           padding: 0,
-          fontFamily: 'sans-serif'
+          fontFamily: 'sans-serif',
         }}
       >
         <Box>
